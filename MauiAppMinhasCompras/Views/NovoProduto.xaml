@@ -4,18 +4,31 @@
              x:Class="MauiAppMinhasCompras.Views.NovoProduto"
              Title="Novo Produto">
 
+    <!-- Tela de cadastro de novos produtos -->
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Salvar" Clicked="ToolbarItem_Clicked"/>
+        <!-- Botão que chama o método no code-behind para salvar os dados no SQLite (operação Create do CRUD) -->
     </ContentPage.ToolbarItems>
 
+
+    <!-- VerticalStackLayout define que os elementos da tela fiquem dispostos um abaixo do outro,
+         formando a área de cadastro de novos produtos. -->
     <VerticalStackLayout Spacing="10" Padding="10">
+
+        <!-- Label: texto explicativo visível para o usuário -->
         <Label Text="Descrição do Produto:"/>
+        <!-- Entry: campo de entrada usado na operação Create do CRUD -->
         <Entry x:Name="txt_descricao"/>
 
+        <!-- Label: texto explicativo visível para o usuário -->
         <Label Text="Quantidade:"/>
+        <!-- Entry: campo de entrada usado na operação Create do CRUD -->
         <Entry x:Name="txt_quantidade" Keyboard="Numeric"/>
 
+        <!-- Label: texto explicativo visível para o usuário -->
         <Label Text="Preço unitário:"/>
+        <!-- Entry: campo de entrada usado na operação Create do CRUD -->
         <Entry x:Name="txt_preco" Keyboard="Numeric"/>
     </VerticalStackLayout>
 </ContentPage>

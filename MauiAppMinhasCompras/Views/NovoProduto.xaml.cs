@@ -6,13 +6,15 @@ public partial class NovoProduto : ContentPage
 {
     public NovoProduto()
     {
-        InitializeComponent(); // funciona porque o x:Class no XAML bate com esta classe
+        InitializeComponent();
+        // Inicializa a tela, conectando o XAML com esta classe (x:Class)
     }
 
     private async void ToolbarItem_Clicked(object sender, EventArgs e)
     {
         try
         {
+            // Cria um novo objeto Produto com os dados digitados nos campos (Create do CRUD)
             Produto p = new Produto
             {
                 Descricao = txt_descricao.Text,
@@ -20,12 +22,15 @@ public partial class NovoProduto : ContentPage
                 Preco = Convert.ToDouble(txt_preco.Text)
             };
 
+            // Insere o produto no banco SQLite (Create)
             await App.Db.Insert(p);
 
+            // Exibe mensagem de sucesso
             await DisplayAlertAsync("Sucesso", "Registro inserido", "Ok");
         }
         catch (Exception ex)
         {
+            // Exibe mensagem de erro caso algo dê errado
             await DisplayAlertAsync("Ops", ex.Message, "Ok");
         }
     }
