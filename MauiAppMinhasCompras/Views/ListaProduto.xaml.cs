@@ -9,7 +9,7 @@ namespace MauiAppMinhasCompras.Views;
 public partial class ListaProduto : ContentPage
 // Classe da página ListaProduto. Herdando de ContentPage (página visual do MAUI).
 {
-    ObservableCollection<Produto> Lista = new ObservableCollection<Produto>();
+    ObservableCollection<Produto> Lista = new ObservableCollection<Produto>(); // fonte de dados (Copilot Ag04 Fichario)
 
 
     public ListaProduto()
@@ -20,7 +20,7 @@ public partial class ListaProduto : ContentPage
         lst_produtos.ItemsSource = Lista;
     }
 
-    protected async override void OnAppearing()
+    protected async override void OnAppearing() // Metodo que que carrega os produtos do banco (Copilot Ag04 Fichario)
     {
         List<Produto> tmp = await App.Db.GetAll(); 
         tmp.ForEach(x => Lista.Add(x));
@@ -41,8 +41,9 @@ public partial class ListaProduto : ContentPage
 
     }
 
-    private async  void txt_search_TextChanged(object sender, TextChangedEventArgs e)
-    {
+    private async  void txt_search_TextChanged(object sender, TextChangedEventArgs e) // Metodo que faz a busca dinamica
+    {                                               // chamando App.Db.Search(q) e atualizando a coleção
+                                                    // Copilot Ag 04 - Fichario
         string q = e.NewTextValue;
 
         Lista.Clear();
@@ -67,4 +68,4 @@ public partial class ListaProduto : ContentPage
     {
 
     }
-}
+} // Isso já cobre o uso do Search com o TextChanged e a filtragem em tempo real. Copilot Ag 04 - Fichario.

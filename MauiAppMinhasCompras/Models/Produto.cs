@@ -13,3 +13,6 @@ namespace MauiAppMinhasCompras.Models
 
     }
 }
+
+// Aqui ficam as classes que representam os dados dos produtos. Copilot Ag 04 - Fichario
+
