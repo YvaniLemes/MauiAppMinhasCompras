@@ -11,7 +11,6 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Somar" Clicked="ToolbarItem_Clicked_1"/>
         <ToolbarItem Text="Adicionar" Clicked="ToolbarItem_Clicked"/>
-        <!-- Botão onde ainda não definimos uma ação para ele -->
 
 
     </ContentPage.ToolbarItems>
