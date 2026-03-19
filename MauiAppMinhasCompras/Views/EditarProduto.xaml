@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
-    <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppMinhasCompras.Views.EditarProduto"
-             Title="EditarProduto"> 
-     <!-- Aqui temos a interfade do uma das telas do app-->
-    
-    
-    
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="{Binding Descricao}">
+
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Salvar" Clicked="ToolbarItem_Clicked"/>
+        <!-- Botão que chama o método no code-behind para salvar os dados no SQLite (operação Create do CRUD) -->
+    </ContentPage.ToolbarItems>
+
+    <VerticalStackLayout Spacing="10" Padding="10">
+
+        <!-- Label: texto explicativo visível para o usuário -->
+        <Label Text="Descrição do Produto:"/>
+        <!-- Entry: campo de entrada usado na operação Create do CRUD -->
+        <Entry x:Name="txt_descricao" Text="{Binding Descricao}" />
+
+        <!-- Label: texto explicativo visível para o usuário -->
+        <Label Text="Quantidade:"/>
+        <!-- Entry: campo de entrada usado na operação Create do CRUD -->
+        <Entry x:Name="txt_quantidade" Text="{Binding Quantidade}" Keyboard="Numeric"/>
+
+        <!-- Label: texto explicativo visível para o usuário -->
+        <Label Text="Preço unitário:"/>
+        <!-- Entry: campo de entrada usado na operação Create do CRUD -->
+        <Entry x:Name="txt_preco" Text="{Binding Preco}"  Keyboard="Numeric"/>
     </VerticalStackLayout>
-    <!-- Aqui organizamos os elementos da tela em coluna vertical-->
+
 
 </ContentPage>

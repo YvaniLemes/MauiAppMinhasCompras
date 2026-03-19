@@ -2,70 +2,111 @@ using MauiAppMinhasCompras.Models;
 using System.Collections.ObjectModel;
 
 namespace MauiAppMinhasCompras.Views;
-// Organiza o código. Aqui estamos na pasta Views (interface gráfica).
-
-
 
 public partial class ListaProduto : ContentPage
-// Classe da página ListaProduto. Herdando de ContentPage (página visual do MAUI).
 {
-    ObservableCollection<Produto> Lista = new ObservableCollection<Produto>(); // fonte de dados (Copilot Ag04 Fichario)
-
+    ObservableCollection<Produto> lista = new ObservableCollection<Produto>();
 
     public ListaProduto()
     {
         InitializeComponent();
-        // Construtor: carrega o layout definido no arquivo ListaProduto.xaml.
 
-        lst_produtos.ItemsSource = Lista;
+        lst_produtos.ItemsSource = lista;
     }
 
-    protected async override void OnAppearing() // Metodo que que carrega os produtos do banco (Copilot Ag04 Fichario)
-    {
-        List<Produto> tmp = await App.Db.GetAll(); 
-        tmp.ForEach(x => Lista.Add(x));
-    }
-
-    private async void ToolbarItem_Clicked(object sender, EventArgs e)
+    protected async override void OnAppearing()
     {
         try
         {
-            // Navegação para a página NovoProduto (Crud)
-            await Navigation.PushAsync(new Views.NovoProduto());
+            lista.Clear();
+
+            List<Produto> tmp = await App.Db.GetAll();
+
+            tmp.ForEach(i => lista.Add(i));
         }
         catch (Exception ex)
         {
-            // Exibindo mensagem de erro com método atualizado
-            await DisplayAlertAsync("Ops", ex.Message, "Ok");
+            await DisplayAlert("Ops", ex.Message, "OK");
         }
-
     }
 
-    private async  void txt_search_TextChanged(object sender, TextChangedEventArgs e) // Metodo que faz a busca dinamica
-    {                                               // chamando App.Db.Search(q) e atualizando a coleção
-                                                    // Copilot Ag 04 - Fichario
-        string q = e.NewTextValue;
+    private void ToolbarItem_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            Navigation.PushAsync(new Views.NovoProduto());
 
-        Lista.Clear();
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Ops", ex.Message, "OK");
+        }
+    }
 
-        List<Produto> tmp = await App.Db.Search(q);
+    private async void txt_search_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        try
+        {
+            string q = e.NewTextValue;
 
-        tmp.ForEach(x => Lista.Add(x));
+            lista.Clear();
 
+            List<Produto> tmp = await App.Db.Search(q);
 
+            tmp.ForEach(i => lista.Add(i));
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Ops", ex.Message, "OK");
+        }
     }
 
     private void ToolbarItem_Clicked_1(object sender, EventArgs e)
     {
-        double soma = Lista.Sum(i => i.Total);
+        double soma = lista.Sum(i => i.Total);
 
-        string msg = $"O total é{soma:C}";
+        string msg = $"O total é {soma:C}";
 
-        DisplayAlert("Total dos produtos", msg, "Ok");
+        DisplayAlert("Total dos Produtos", msg, "OK");
     }
 
-    private void MenuItem_Clicked(object sender, EventArgs e)
+    private async void MenuItem_Clicked(object sender, EventArgs e)
     {
+        try
+        {
+            MenuItem selecinado = sender as MenuItem;
 
+            Produto p = selecinado.BindingContext as Produto;
+
+            bool confirm = await DisplayAlert(
+                "Tem Certeza?", $"Remover {p.Descricao}?", "Sim", "Não");
+
+            if (confirm)
+            {
+                await App.Db.Delete(p.Id);
+                lista.Remove(p);
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Ops", ex.Message, "OK");
+        }
     }
-} // Isso já cobre o uso do Search com o TextChanged e a filtragem em tempo real. Copilot Ag 04 - Fichario.
+
+    private void lst_produtos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        try
+        {
+            Produto p = e.SelectedItem as Produto;
+
+            Navigation.PushAsync(new Views.EditarProduto
+            {
+                BindingContext = p,
+            });
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Ops", ex.Message, "OK");
+        }
+    }
+}
