@@ -67,6 +67,15 @@
     </ItemGroup>
 
     <ItemGroup>
+      <AndroidResource Remove="Resources\Styles\**" />
+      <Compile Remove="Resources\Styles\**" />
+      <Content Remove="Resources\Styles\**" />
+      <EmbeddedResource Remove="Resources\Styles\**" />
+      <MauiXaml Remove="Resources\Styles\**" />
+      <None Remove="Resources\Styles\**" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
@@ -80,6 +89,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <MauiXaml Update="Resources\NewPage1.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
       <MauiXaml Update="Views\EditarProduto.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
