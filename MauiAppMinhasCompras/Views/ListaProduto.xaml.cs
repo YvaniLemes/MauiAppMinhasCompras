@@ -53,11 +53,17 @@ public partial class ListaProduto : ContentPage
 
             List<Produto> tmp = await App.Db.Search(q);
 
+            lst_produtos.IsEnabled = true;
+
             tmp.ForEach(i => lista.Add(i));
         }
         catch (Exception ex)
         {
             await DisplayAlert("Ops", ex.Message, "OK");
+        }
+        finally
+        {
+            lst_produtos.IsEnabled = false;
         }
     }
 
@@ -107,6 +113,26 @@ public partial class ListaProduto : ContentPage
         catch (Exception ex)
         {
             DisplayAlert("Ops", ex.Message, "OK");
+        }
+    }
+
+    private async void lst_produtos_Refreshing(object sender, EventArgs e)
+    {
+
+        try
+        {
+            lista.Clear();
+
+            List<Produto> tmp = await App.Db.GetAll();
+
+            tmp.ForEach(i => lista.Add(i));
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Ops", ex.Message, "OK");
+        } finally
+        {
+            lst_produtos.IsEnabled = false;
         }
     }
 }

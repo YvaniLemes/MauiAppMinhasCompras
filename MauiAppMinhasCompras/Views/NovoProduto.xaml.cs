@@ -27,6 +27,10 @@ public partial class NovoProduto : ContentPage
 
             // Exibe mensagem de sucesso
             await DisplayAlertAsync("Sucesso", "Registro inserido", "Ok");
+
+            // Retorna a tela anterior
+            await Navigation.PopAsync();
+
         }
         catch (Exception ex)
         {
