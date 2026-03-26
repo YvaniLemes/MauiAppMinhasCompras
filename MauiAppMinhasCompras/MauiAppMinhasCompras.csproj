@@ -1,6 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-    <PropertyGroup>
+	<PropertyGroup>
+		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+	</PropertyGroup>
+<!--Orientacao do Copilot para nao tratar avisos como erros-->
+
+	<PropertyGroup>
         <TargetFrameworks>net10.0-android</TargetFrameworks>
         <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">$(TargetFrameworks);net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
@@ -73,6 +78,10 @@
       <EmbeddedResource Remove="Resources\Style\**" />
       <MauiXaml Remove="Resources\Style\**" />
       <None Remove="Resources\Style\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Resources\Styles\Styles.xaml.cs" />
     </ItemGroup>
 
     <ItemGroup>
