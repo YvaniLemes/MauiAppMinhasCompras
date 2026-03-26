@@ -67,12 +67,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <AndroidResource Remove="Resources\Styles\**" />
-      <Compile Remove="Resources\Styles\**" />
-      <Content Remove="Resources\Styles\**" />
-      <EmbeddedResource Remove="Resources\Styles\**" />
-      <MauiXaml Remove="Resources\Styles\**" />
-      <None Remove="Resources\Styles\**" />
+      <AndroidResource Remove="Resources\Style\**" />
+      <Compile Remove="Resources\Style\**" />
+      <Content Remove="Resources\Style\**" />
+      <EmbeddedResource Remove="Resources\Style\**" />
+      <MauiXaml Remove="Resources\Style\**" />
+      <None Remove="Resources\Style\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -92,6 +92,9 @@
       <MauiXaml Update="Resources\NewPage1.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
+      <MauiXaml Update="Resources\Styles\Styles.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
       <MauiXaml Update="Views\EditarProduto.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
@@ -101,6 +104,10 @@
       <MauiXaml Update="Views\NovoProduto.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Resources\Styles\Colors.xaml\" />
     </ItemGroup>
 
 </Project>
